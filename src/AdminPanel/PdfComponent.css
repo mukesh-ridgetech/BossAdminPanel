@@ -1,0 +1,63 @@
+.pdf-viewer-container {
+    max-width: 95%; /* Set maximum width */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .pdf-viewer-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pdf-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .pdf-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .pdf-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pdf-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .pdf-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Ensure full width */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .pdf-canvas {
+    max-width: 100%; /* Make sure PDF doesn't overflow */
+    max-height: 600px; /* Set a maximum height for the PDF */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+
+  .ant-modal{
+    width: 80% !important;
+    margin: auto !important;
+}
+
+.pdf-canvas-wrapper canvas{
+     width: 100% !important;
+}
