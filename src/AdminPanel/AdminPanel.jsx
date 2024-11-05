@@ -30,7 +30,7 @@ import VacanyUpload from "./VacanyUpload";
 import logo from '../../public/images/dewanLogo.png'
 
 const AdminPanel = () => {
-  const [selectedTab, setSelectedTab] = useState("dashboard");
+  const [selectedTab, setSelectedTab] = useState("applicationSend");
  const navigate= useNavigate();
 
   const handleMenuClick = (e) => {
@@ -120,7 +120,7 @@ const AdminPanel = () => {
             onClick={handleMenuClick}
           >
             <Menu.Item key="applicationSend" icon={<DashboardOutlined />}>
-            View Application
+             View Application
             </Menu.Item>
 
             {menuItems?.map((menuItem) => (
