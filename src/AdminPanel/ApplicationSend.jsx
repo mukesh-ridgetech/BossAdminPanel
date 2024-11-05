@@ -16,7 +16,7 @@ import axios from "axios";
 import Password from "antd/es/input/Password";
 // import { baseurl } from "../helper/Helper";
 import { useAuth } from "../context/auth";
-import PdfComp from "./pdfComp";
+import PdfComp from "./PdfComp";
 import "../Style/AdminPanel.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
