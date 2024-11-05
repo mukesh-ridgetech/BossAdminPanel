@@ -66,7 +66,7 @@ const ApplicationSend = () => {
 
   const handleStatusToggle = async(record)=>{
       try {
-         const response = await axios.patch(`${baseurl}/api/admin/toggled/${record._id}`)
+         const response = await axios.patch(`${baseurl}/api/sendApplication/toggled/${record._id}`)
          console.log(response)
 
          if(response){
@@ -109,18 +109,18 @@ const ApplicationSend = () => {
     },
 
 
-    // {
-    //   title: "Status",
-    //   key: "Status",
-    //   render: (_, record) => (
-    //     <Switch
-    //       checked={record.Status === "Active"}
-    //       onChange={() => handleStatusToggle(record)}
-    //       checkedChildren="Active"
-    //       unCheckedChildren="Inactive"
-    //     />
-    //   ),
-    // },
+    {
+      title: "Status",
+      key: "status",
+      render: (_, record) => (
+        <Switch
+          checked={record.status === "Active"}
+          onChange={() => handleStatusToggle(record)}
+          checkedChildren="Active"
+          unCheckedChildren="Inactive"
+        />
+      ),
+    },
 
     {
       title: "Actions",

@@ -55,7 +55,7 @@ const PersonalDetails = () => {
 
   const handleStatusToggle = async(record)=>{
       try {
-         const response = await axios.patch(`${baseurl}/api/admin/toggled/${record._id}`)
+         const response = await axios.patch(`${baseurl}/api/personal/toggled/${record._id}`)
          console.log(response)
 
          if(response){
@@ -149,18 +149,18 @@ const PersonalDetails = () => {
       
   
 
-    // {
-    //   title: "Status",
-    //   key: "Status",
-    //   render: (_, record) => (
-    //     <Switch
-    //       checked={record.Status === "Active"}
-    //       onChange={() => handleStatusToggle(record)}
-    //       checkedChildren="Active"
-    //       unCheckedChildren="Inactive"
-    //     />
-    //   ),
-    // },
+    {
+      title: "Status",
+      key: "status",
+      render: (_, record) => (
+        <Switch
+          checked={record.status === "Active"}
+          onChange={() => handleStatusToggle(record)}
+          checkedChildren="Active"
+          unCheckedChildren="Inactive"
+        />
+      ),
+    },
 
     
   ];

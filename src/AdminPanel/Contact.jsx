@@ -20,6 +20,7 @@ import "../Style/AdminPanel.css";
 
 
 
+
 const Contact = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,7 +56,7 @@ const Contact = () => {
 
   const handleStatusToggle = async(record)=>{
       try {
-         const response = await axios.patch(`${baseurl}/api/admin/toggled/${record._id}`)
+         const response = await axios.patch(`${baseurl}/api/contacts/toggled/${record._id}`)
          console.log(response)
 
          if(response){
@@ -105,18 +106,18 @@ const Contact = () => {
       },
   
 
-    // {
-    //   title: "Status",
-    //   key: "Status",
-    //   render: (_, record) => (
-    //     <Switch
-    //       checked={record.Status === "Active"}
-    //       onChange={() => handleStatusToggle(record)}
-    //       checkedChildren="Active"
-    //       unCheckedChildren="Inactive"
-    //     />
-    //   ),
-    // },
+    {
+      title: "Status",
+      key: "status",
+      render: (_, record) => (
+        <Switch
+          checked={record.status === "Active"}
+          onChange={() => handleStatusToggle(record)}
+          checkedChildren="Active"
+          unCheckedChildren="Inactive"
+        />
+      ),
+    },
 
     
   ];

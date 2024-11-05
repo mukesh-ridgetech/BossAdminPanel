@@ -53,6 +53,8 @@ const VacanyUpload = () => {
     }
   };
 
+
+
  
   const viewPdf = (record)=>{
 
@@ -66,7 +68,7 @@ const VacanyUpload = () => {
 
   const handleStatusToggle = async(record)=>{
       try {
-         const response = await axios.patch(`${baseurl}/api/admin/toggled/${record._id}`)
+         const response = await axios.patch(`${baseurl}/api/adminPost/toggled/${record._id}`)
          console.log(response)
 
          if(response){
@@ -108,6 +110,19 @@ const VacanyUpload = () => {
       key: "email",
     },
 
+
+    {
+        title: "Status",
+        key: "status",
+        render: (_, record) => (
+          <Switch
+            checked={record.status === "Active"}
+            onChange={() => handleStatusToggle(record)}
+            checkedChildren="Active"
+            unCheckedChildren="Inactive"
+          />
+        ),
+      },
 
     // {
     //   title: "Status",

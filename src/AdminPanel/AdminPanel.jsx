@@ -44,8 +44,8 @@ const AdminPanel = () => {
 
   const renderContent = () => {
     switch (selectedTab) {
-        case "dashboard":
-        return <Home />;
+        // case "dashboard":
+        // return <Home />;
         case "jobPost":
         return <JobPost />;
         case "applicationSend":
@@ -64,11 +64,11 @@ const AdminPanel = () => {
   const menuItems = [
     // { key: "home", icon: <TeamOutlined />, label: "Home" },
     
-    {
-      key: "applicationSend",
-      icon: <TeamOutlined />,
-      label: " View Application",
-    },
+    // {
+    //   key: "applicationSend",
+    //   icon: <TeamOutlined />,
+    //   label: " View Application",
+    // },
 
     {
         key: "jobPost",
@@ -115,11 +115,13 @@ const AdminPanel = () => {
         <Sider className="sider">
           <Menu
             mode="inline"
-            defaultSelectedKeys={["dashboard"]}
+            defaultSelectedKeys={["applicationSend"]}
             style={{ height: "100%", borderRight: 0 }}
             onClick={handleMenuClick}
           >
-            
+            <Menu.Item key="applicationSend" icon={<DashboardOutlined />}>
+            View Application
+            </Menu.Item>
 
             {menuItems?.map((menuItem) => (
               <Menu.Item key={menuItem?.key} icon={menuItem?.icon}>
