@@ -11,7 +11,7 @@ import {
   Upload,
   Switch,
 } from "antd";
-import { baseurl } from "../helper/Helper";
+import { baseurl } from "../helper/Helper.jsx";
 import axios from "axios";
 import Password from "antd/es/input/Password";
 // import { baseurl } from "../helper/Helper";

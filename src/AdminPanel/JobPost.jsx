@@ -20,7 +20,7 @@ import Password from "antd/es/input/Password";
 // import { baseurl } from "../helper/Helper";
 import '../Style/Sendjob.css'
 import { useAuth } from "../context/auth";
-import { baseUrl } from "../../../BossFrontend/src/components/helper/helper";
+// import { baseurl } from "../helper/Helper.jsx";
 
 
 const NeighbourhoodData = [
