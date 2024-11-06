@@ -28,6 +28,7 @@ const PersonalDetails = () => {
   const [form] = Form.useForm();
   const [auth, setAuth] = useAuth();
   const [pdfFile, setPdfFile] = useState(null);
+  
 
   console.log(auth.user._id);
 
@@ -62,7 +63,13 @@ const PersonalDetails = () => {
           minutes = minutes < 10 ? '0' + minutes : minutes;
         
           // Return the formatted time
-          return `${hours}:${minutes} ${ampm}`;
+
+          if(timestamp){
+            return `${hours}:${minutes} ${ampm}`;
+          }
+
+          return "";
+         
         }
 
 
