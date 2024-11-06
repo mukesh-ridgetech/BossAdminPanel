@@ -113,7 +113,9 @@ const JobPost = () =>
 
       if (respons.data.success)
       {
-        setData(respons.data.jobs);
+
+        const reversedArr = respons.data.jobs.reverse();
+        setData(reversedArr);
         message.success('Job post fetched successfully!');
       }
 
@@ -280,7 +282,7 @@ const JobPost = () =>
 
       if (response.data)
       {
-        message.success("PostJob created successfully!");
+        message.success("Job Updated Successfully");
         setIsModalOpen(false);
         setPhoto("");
         fetchJobPost()
@@ -341,7 +343,7 @@ const JobPost = () =>
 
       if (response.data)
       {
-        message.success("Job post update successfully!");
+        message.success("Job Updated Successfully");
         setIsModalOpen(false);
         setPhoto("");
         setVal([{ type: '' }])
@@ -382,6 +384,17 @@ const JobPost = () =>
       dataIndex: "email",
       key: "email",
     },
+     
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),  // Sort by date
+      render: (createdAt) => {
+        const date = new Date(createdAt);
+        return date.toLocaleDateString();  // Format the date
+      },
+    },
 
     {
       title: "Job Type",
@@ -390,7 +403,7 @@ const JobPost = () =>
     },
     // category
     {
-      title: "Eduction",
+      title: "Education",
       // dataIndex: "locations",
       key: "upper_jd",
       render: (_, record) => (
@@ -517,7 +530,7 @@ const JobPost = () =>
   return (
     <div>
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
-        Post job
+      Post a New  Job
       </Button>
       <Table
         columns={columns}
@@ -546,7 +559,7 @@ const JobPost = () =>
 
           <Form.Item
             name="jobName"
-            label="Job title"
+            label="Job Title"
             rules={[{ required: true, message: 'Please enter the job title!' }]}
 
           >

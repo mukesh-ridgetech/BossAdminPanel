@@ -24,6 +24,7 @@ const { Header, Sider, Content } = Layout;
 import JobPost from "./JobPost";
 import ApplicationSend from "./ApplicationSend";
 import VacanyUpload from "./VacanyUpload";
+import Users from "./Users";
 // import CreateAmenity from "./CreateAmenity";
 
 
@@ -44,8 +45,8 @@ const AdminPanel = () => {
 
   const renderContent = () => {
     switch (selectedTab) {
-        // case "dashboard":
-        // return <Home />;
+        case "user":
+        return <Users />;
         case "jobPost":
         return <JobPost />;
         case "applicationSend":
@@ -64,35 +65,35 @@ const AdminPanel = () => {
   const menuItems = [
     // { key: "home", icon: <TeamOutlined />, label: "Home" },
     
-    // {
-    //   key: "applicationSend",
-    //   icon: <TeamOutlined />,
-    //   label: " View Application",
-    // },
+    {
+      key: "user",
+      icon: <TeamOutlined />,
+      label: "Users",
+    },
 
     {
         key: "jobPost",
         // icon: <FormOutlined />,
         icon: <ExportOutlined />,
-        label: "Post Job",
+        label: "Job Posts",
       },
 
       {
         key: "contact",
         icon: <CalendarOutlined />,
-        label: "Contact Details",
+        label: "Query Recieved",
       },
 
-      {
-        key: "personal-details",
-       icon: <FormOutlined />,
-        label: "Personal Details",
-      },
+      // {
+      //   key: "personal-details",
+      //  icon: <FormOutlined />,
+      //   label: "Personal Details",
+      // },
 
       {
         key: "vacancy",
         icon: <InsertRowAboveOutlined />,
-        label: "Vacancy Upload",
+        label: "Vacancies Recieved",
       },
   ];
 
@@ -111,8 +112,8 @@ const AdminPanel = () => {
         </Button>
       </Header>
 
-      <Layout>
-        <Sider className="sider">
+      <Layout style={{minWidth:"250px"}}>
+        <Sider className="sider" style={{minWidth:"250px"}}>
           <Menu
             mode="inline"
             defaultSelectedKeys={["applicationSend"]}
@@ -120,7 +121,7 @@ const AdminPanel = () => {
             onClick={handleMenuClick}
           >
             <Menu.Item key="applicationSend" icon={<DashboardOutlined />}>
-             View Application
+            Job Applicants
             </Menu.Item>
 
             {menuItems?.map((menuItem) => (

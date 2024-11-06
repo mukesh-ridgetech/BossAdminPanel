@@ -45,8 +45,14 @@ const VacanyUpload = () => {
       const res = await axios.get(baseurl + "/api/adminPost/getAllAdminPost");
 
       console.log(res.data);
-      setData(res.data);
-      setLoading(false);
+
+      if(res.data){
+        const reversedArr = res.data.reverse();
+        setData(reversedArr);
+        setLoading(false);
+      }
+      
+      
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
@@ -86,6 +92,9 @@ const VacanyUpload = () => {
   
 
   const columns = [
+
+
+
     {
       title: "First Name",
       dataIndex: "firstName",
@@ -98,6 +107,17 @@ const VacanyUpload = () => {
         key: "lastName",
       },
      
+
+      {
+        title: 'Date',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
+        sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),  // Sort by date
+        render: (createdAt) => {
+          const date = new Date(createdAt);
+          return date.toLocaleDateString();  // Format the date
+        },
+      },
       {
         title: "Phone Number",
         dataIndex: "phoneNumber",
@@ -111,18 +131,21 @@ const VacanyUpload = () => {
     },
 
 
-    {
-        title: "Status",
-        key: "status",
-        render: (_, record) => (
-          <Switch
-            checked={record.status === "Active"}
-            onChange={() => handleStatusToggle(record)}
-            checkedChildren="Active"
-            unCheckedChildren="Inactive"
-          />
-        ),
-      },
+
+
+
+    // {
+    //     title: "Status",
+    //     key: "status",
+    //     render: (_, record) => (
+    //       <Switch
+    //         checked={record.status === "Active"}
+    //         onChange={() => handleStatusToggle(record)}
+    //         checkedChildren="Active"
+    //         unCheckedChildren="Inactive"
+    //       />
+    //     ),
+    //   },
 
     // {
     //   title: "Status",
@@ -142,7 +165,7 @@ const VacanyUpload = () => {
       key: "actions",
       render: (_, record) => (
         <>
-          <Button onClick={() => viewPdf(record)}>View Resume</Button>
+          <Button onClick={() => viewPdf(record)}>View Vacancy</Button>
         </>
       ),
     },
@@ -163,15 +186,12 @@ const VacanyUpload = () => {
         // title={editingUser ? 'Edit User' : 'Add User'}
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
-        // footer={null}
+        footer={false}
         style={{width:"70%"}}
       >
       
        {/* <h1>{pdfFile}</h1> */}
        <PdfComp url={pdfFile}/>
-
-
-        
 
         </Modal>
     </div>

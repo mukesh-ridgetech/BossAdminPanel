@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PDF from 'react-pdf-js';
 import './PdfComponent.css'; // Import your CSS
+import DownloadPdf from './DownloadPdf';
 
 const PdfComp = ({ url }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -11,6 +12,8 @@ const PdfComp = ({ url }) => {
   };
 
   return (
+
+    <>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-title">Resume Pdf</h1>
       
@@ -43,7 +46,16 @@ const PdfComp = ({ url }) => {
           scale={1.5} // Adjust scale as needed
         />
       </div>
+
+
+
     </div>
+
+    <div style={{marginLeft:"20px",marginTop:"20px"}}>
+    <DownloadPdf url={url}/>
+    </div>
+    
+    </>
   );
 };
 

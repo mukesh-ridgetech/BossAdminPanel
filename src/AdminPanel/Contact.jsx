@@ -40,8 +40,13 @@ const Contact = () => {
     try {
       const res = await axios.get(baseurl + "/api/contacts/getAllContacts");
 
-      console.log(res.data.contacts);
-      setData(res.data.contacts);
+      // console.log(res.data.contacts);
+
+      if(res.data){
+        const reversedArr = res.data.contacts.reverse();
+        setData(reversedArr);
+      }
+      
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -97,6 +102,19 @@ const Contact = () => {
       dataIndex: "email",
       key: "email",
     },
+
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),  // Sort by date
+      render: (createdAt) => {
+        const date = new Date(createdAt);
+        return date.toLocaleDateString();  // Format the date
+      },
+    },
+
+
 
 
     {

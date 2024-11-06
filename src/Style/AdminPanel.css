@@ -62,6 +62,7 @@
 }
 
 .sider {
+  width: 250px;
   background: #fff;
 }
 
@@ -81,3 +82,36 @@
 
 
 
+/* Details page */
+.details-container{
+  width: 80%;
+  margin: auto;
+  /* margin-left: 40px; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.details-container h2{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.details-container-left{
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 700;
+}
+
+.details-container-right{
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.ant-layout-sider-children{
+  min-width: 250px;
+}
