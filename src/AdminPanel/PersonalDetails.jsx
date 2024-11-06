@@ -40,7 +40,70 @@ const PersonalDetails = () => {
       const res = await axios.get(baseurl + "/api/personal/get-details");
 
       console.log(res.data);
-      setData(res.data);
+
+      const filterdata = res?.data?.map((item)=>{
+             
+        function convertTo12HourFormat(timestamp) {
+          // Create a new Date object from the timestamp
+          const date = new Date(timestamp);
+        
+          // Get the hours and minutes
+          let hours = date.getUTCHours();
+          let minutes = date.getUTCMinutes();
+        
+          // Determine AM or PM suffix
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+        
+          // Convert hours to 12-hour format
+          hours = hours % 12;
+          hours = hours ? hours : 12; // If hour is 0, make it 12
+        
+          // Format minutes to always be two digits
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+        
+          // Return the formatted time
+          return `${hours}:${minutes} ${ampm}`;
+        }
+
+
+        const startTime = convertTo12HourFormat(item?.startTime);
+        const finishTime = convertTo12HourFormat(item?.finishTime)
+
+          const returndata = {
+              firstName:item?.firstName,
+      lastName:item?.lastName,
+      dateOfBirth:item?.dateOfBirth,
+      gender:item?.dateOfBirth,
+      countryOfResidence:item?.countryOfResidence,
+      phoneNumber:item?.phoneNumber,
+      email:item?.email,
+      dutchPassport:item?.dutchPassport,
+      driversLicense:item?.License,
+      drivingLicenseCategory:item?.drivingLicenseCategory,
+      ownVehicle:item?.ownVehicle,
+      currentlyEmployed:item?.currentlyEmployed,
+       jobTitle:item?.jobTitle,
+      companyName1:item?.companyName1,
+      jobTitle1:item?.jobTitle1,
+      DOS:item?.DOS,
+      RFL:item?.RFL,
+      HAW:item?.HAW,
+      day:item?.day,
+      WorkE:item?.WorkE,
+      WorkN:item?.WorkN,
+      startTime:startTime,
+      finishTime:finishTime,
+      highEducatioin:item?.highEducatioin,
+      companyName:item?.companyName,
+      status:item?.status,
+      id:item?._id
+          }
+
+          return returndata
+      })
+
+      console.log("filterdata",filterdata)
+      setData(filterdata);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -55,7 +118,7 @@ const PersonalDetails = () => {
 
   const handleStatusToggle = async(record)=>{
       try {
-         const response = await axios.patch(`${baseurl}/api/personal/toggled/${record._id}`)
+         const response = await axios.patch(`${baseurl}/api/personal/toggled/${record.id}`)
          console.log(response)
 
          if(response){
@@ -144,6 +207,85 @@ const PersonalDetails = () => {
         title: " Currently Employed?",
         dataIndex: "currentlyEmployed",
         key: "currentlyEmployed",
+      },
+
+      {
+        title: " Company Name",
+        dataIndex: "companyName",
+        key: "companyName",
+      },
+
+      {
+        title: " Job Title",
+        dataIndex: "jobTitle",
+        key: "jobTitle",
+      },
+
+      {
+        title: "Last Company Name",
+        dataIndex: "companyName1",
+        key: "companyName",
+      },
+
+      {
+        title: "Last Job Title",
+        dataIndex: "jobTitle1",
+        key: "jobTitle",
+      },
+
+      {
+        title: "Date In Service",
+        dataIndex: "DOS",
+        key: "DOS",
+      },
+
+      {
+        title: "Reason for Leaving",
+        dataIndex: "RFL",
+        key: "RFL",
+      },
+
+      {
+        title: "Hours Available to Work",
+        dataIndex: "HAW",
+        key: "HAW",
+      },
+
+      {
+        title: "Days",
+        dataIndex: "day",
+        key: "day",
+      },
+
+      {
+        title: "Can You Work Evenings?",
+        dataIndex: "WorkE",
+        key: "WorkE",
+      },
+
+      {
+        title: "Can You Work Nights?",
+        dataIndex: "WorkN",
+        key: "WorkN",
+      },
+
+      {
+        title: "Earliest Start Time",
+        dataIndex: "startTime",
+        key: "startTime",
+      },
+
+
+      {
+        title: "Latest Finish Time",
+        dataIndex: "finishTime",
+        key: "finishTime",
+      },
+
+      {
+        title: " Highest Level of Education Completed: ",
+        dataIndex: "highEducatioin",
+        key: "highEducatioin",
       },
 
       
