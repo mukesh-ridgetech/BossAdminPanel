@@ -22,6 +22,7 @@ import { useAuth } from "../context/auth";
 import PdfComp from "./PdfComp";
 import "../Style/AdminPanel.css";
 import { FilterOutlined } from '@ant-design/icons';
+import { baseUrl } from "../../../Boss_frontend/src/components/helper/helper.jsx";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/build/pdf.worker.min.js",
@@ -41,25 +42,53 @@ const ApplicationSend = () => {
   const [details,setDetails] = useState(null);
   const[st,setSt] = useState()
   const [et,setEt] = useState()
+  const [jobTitlesToFilter,setjobTitlesToFilter] = useState();
 
   // console.log(auth.user._id);
 
+  const jobTitle = async()=>{
+       try {
+         const response = await axios.get(`${baseurl}/api/jobPost/jobNames`);
+        //  console.log("jobtitle",response.data);
 
-  const jobTitlesToFilter = [
-    { text: "Reservations/Collections Clerk", value: "Reservations/Collections Clerk" },
-    { text: "Commercial Data Analyst", value: "Commercial Data Analyst" },
-    { text: "Fuel Operator", value: "Fuel Operator" }
-  ];
+
+         if(response.data){
+          const data = response?.data?.map((item)=>{
+            const returndata = {
+             text:item?.jobName,
+             value:item?.jobName,
+            }
+         return returndata;
+           
+       })
+
+       setjobTitlesToFilter(data)
+       console.log(data,"data is now title")
+         }
+       } catch (error) {
+        console(error)
+       }
+  }
+
+
+  // const jobTitlesToFilter = [
+  //   { text: "Reservations/Collections Clerk", value: "Reservations/Collections Clerk" },
+  //   { text: "Commercial Data Analyst", value: "Commercial Data Analyst" },
+  //   { text: "Fuel Operator", value: "Fuel Operator" }
+  // ];
 
   useEffect(() => {
+    jobTitle();
     fetchData();
+    
+
   }, []);
 
   const fetchData = async () => {
     try {
       const res = await axios.get(baseurl + "/api/sendApplication/getAllSendApplication");
       const personal = await axios.get(baseurl + "/api/personal/get-details");
-      console.log("personal.data",personal.data)
+      // console.log("personal.data",personal.data)
 
       if(res.data && personal.data){
         const combinedArray = [...personal.data, ...res.data.sendApplications];
@@ -99,7 +128,7 @@ const ApplicationSend = () => {
       
       setData(sortedData);
       
-      console.log("a is sortedData",sortedData);
+      // console.log("a is sortedData",sortedData);
       }
      
       // console.log(res.data.sendApplications);
@@ -175,45 +204,103 @@ const ApplicationSend = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-
+    let y = 20; // Initial y-coordinate
+  
     doc.setFontSize(16);
-    doc.text('Personal Details', 10, 10);
-
+    doc.text('Personal Details', 10, y);
+  
     doc.setFontSize(12);
-    doc.text(`First Name: ${details?.firstName}`, 10, 20);
-    doc.text(`Last Name: ${details?.lastName}`, 10, 30);
-    doc.text(`Date of Birth: ${details?.dateOfBirth}`, 10, 40);
-    doc.text(`Gender: ${details?.gender}`, 10, 50);
-    doc.text(`Country of Residence: ${details?.countryOfResidence}`, 10, 60);
-    doc.text(`Phone Number: ${details?.phoneNumber}`, 10, 70);
-    doc.text(`E-mail Address: ${details?.email}`, 10, 80);
-    doc.text(`Valid Dutch Passport: ${details?.dutchPassport}`, 10, 90);
-    doc.text(`Valid Driver's License: ${details?.driversLicense}`, 10, 100);
-    doc.text(`Do You Own A Vehicle: ${details?.ownVehicle}`, 10, 110);
-
-    doc.text('Work Experience', 10, 130);
-    doc.text(`Are you currently Employed: ${details?.currentlyEmployed}`, 10, 140);
-    doc.text(`Company Name: ${details?.companyName}`, 10, 150);
-    doc.text(`Job Title: ${details?.jobTitle}`, 10, 160);
-    doc.text(`Last Job Title: ${details?.jobTitle1}`, 10, 170);
-    doc.text(`Last Company Name: ${details?.companyName1}`, 10, 180);
-    doc.text(`Date In Service: ${details?.DOS}`, 10, 190);
-    doc.text(`Reason for Leaving: ${details?.RFL}`, 10, 200);
-
-    doc.text('Availability', 10, 220);
-    doc.text(`Hours Available to Work: ${details?.HAW}`, 10, 230);
-    doc.text(`Days: ${details?.day}`, 10, 240);
-    doc.text(`Can You Work Evenings: ${details?.WorkE}`, 10, 250);
-    doc.text(`Can You Work Nights: ${details?.WorkN}`, 10, 260);
-    doc.text(`Earliest Start Time: ${st}`, 10, 270);
-    doc.text(`Latest Finish Time: ${et}`, 10, 280);
-
-    doc.text('Education', 10, 300);
-    doc.text(`Highest Level of Education Completed: ${details?.highEducatioin}`, 10, 310);
-
+    y += 10;
+    doc.text(`First Name: ${details?.firstName} Last Name: ${details?.lastName}`, 10, y);
+    
+    y += 10;
+    doc.text(`Date of Birth: ${details?.dateOfBirth}`, 10, y);
+    
+    y += 10;
+    doc.text(`Gender: ${details?.gender}`, 10, y);
+    
+    y += 10;
+    doc.text(`Country of Residence: ${details?.countryOfResidence}`, 10, y);
+    
+    y += 10;
+    doc.text(`Phone Number: ${details?.phoneNumber}`, 10, y);
+    
+    y += 10;
+    doc.text(`E-mail Address: ${details?.email}`, 10, y);
+    
+    y += 10;
+    doc.text(`Valid Dutch Passport: ${details?.dutchPassport}`, 10, y);
+    
+    y += 10;
+    doc.text(`Valid Driver's License: ${details?.driversLicense}`, 10, y);
+    
+    y += 10;
+    doc.text(`Do You Own A Vehicle: ${details?.ownVehicle}`, 10, y);
+  
+    y += 20;
+    doc.text('Work Experience', 10, y);
+    
+    y += 10;
+    doc.text(`Are you currently Employed: ${details?.currentlyEmployed}`, 10, y);
+    
+    y += 10;
+    doc.text(`Company Name: ${details?.companyName}`, 10, y);
+    
+    y += 10;
+    doc.text(`Job Title: ${details?.jobTitle}`, 10, y);
+    
+    y += 10;
+    doc.text(`Last Job Title: ${details?.jobTitle1}`, 10, y);
+    
+    y += 10;
+    doc.text(`Last Company Name: ${details?.companyName1}`, 10, y);
+    
+    y += 10;
+    doc.text(`Date In Service: ${details?.DOS}`, 10, y);
+    
+    y += 10;
+    doc.text(`Reason for Leaving: ${details?.RFL}`, 10, y);
+  
+    y += 20;
+    doc.text('Availability', 10, y);
+    
+    y += 10;
+    doc.text(`Hours Available to Work: ${details?.HAW}`, 10, y);
+    
+    y += 10;
+    doc.text(`Days: ${details?.day}`, 10, y);
+    
+    y += 10;
+    doc.text(`Can You Work Evenings: ${details?.WorkE}`, 10, y);
+    
+    y += 10;
+    doc.text(`Can You Work Nights: ${details?.WorkN}`, 10, y);
+    
+    y += 10;
+    doc.text(`Earliest Start Time: ${st}`, 10, y);
+    
+    y += 10;
+    doc.text(`Latest Finish Time: ${et}`, 10, y);
+  
+    // Check if we are running out of space on the page and add a new page if necessary
+    const pageHeight = doc.internal.pageSize.height;
+    if (y + 30 > pageHeight) { // 30 is a margin buffer
+      doc.addPage();
+      y = 20; // Reset y-coordinate for the new page
+    }
+  
+    y += 20; // Add spacing before the "Education" section
+    doc.text('Education', 10, y);
+    
+    y += 10;
+    doc.text(`Highest Level of Education Completed: ${details?.highEducation}`, 10, y);
+  
     // Save the PDF
     doc.save('details.pdf');
   };
+  
+  
+  
 
 
   const handleStatusToggle = async(record)=>{
@@ -264,10 +351,12 @@ const ApplicationSend = () => {
       title: 'Job Title',
       dataIndex: ['job', 'jobName'],  // Access job title inside the jobs object
       key: 'jobTitle',
-      filters: jobTitlesToFilter,  // Add filter options
-      filterMultiple: false, // Allow only one filter selection
+      filters: jobTitlesToFilter?.map(title => ({
+        text: title?.text,  // Use the 'text' from the API data (job title label)
+        value: title?.value  // Use the 'value' from the API data (job title value)
+      })),
+      filterMultiple: false,  // Allow only one filter selection
       onFilter: (value, record) => record?.job?.jobName === value,  // Filtering logic
-     
     },
 
 
@@ -320,12 +409,13 @@ const ApplicationSend = () => {
   return (
     <div>
       
-      <Table
-        columns={columns}
-        dataSource={data}
-        loading={loading}
-        // rowKey="_id"
-      />
+
+         <Table
+          columns={columns}
+          dataSource={data}
+          loading={loading}
+          // rowKey="_id"
+        />
 
 
        <Modal
