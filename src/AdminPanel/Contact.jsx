@@ -124,18 +124,18 @@ const Contact = () => {
       },
   
 
-    {
-      title: "Status",
-      key: "status",
-      render: (_, record) => (
-        <Switch
-          checked={record.status === "Active"}
-          onChange={() => handleStatusToggle(record)}
-          checkedChildren="Active"
-          unCheckedChildren="Inactive"
-        />
-      ),
-    },
+    // {
+    //   title: "Status",
+    //   key: "status",
+    //   render: (_, record) => (
+    //     <Switch
+    //       checked={record.status === "Active"}
+    //       onChange={() => handleStatusToggle(record)}
+    //       checkedChildren="Active"
+    //       unCheckedChildren="Inactive"
+    //     />
+    //   ),
+    // },
 
     
   ];
