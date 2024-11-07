@@ -22,7 +22,7 @@ import { useAuth } from "../context/auth";
 import PdfComp from "./PdfComp";
 import "../Style/AdminPanel.css";
 import { FilterOutlined } from '@ant-design/icons';
-import { baseUrl } from "../../../Boss_frontend/src/components/helper/helper.jsx";
+// import { baseUrl } from "../../../Boss_frontend/src/components/helper/helper.jsx";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/build/pdf.worker.min.js",
