@@ -167,7 +167,7 @@ const Users = () => {
   return (
     <div>
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
-        Add Users
+        Add User
       </Button>
       <Table
         columns={columns}

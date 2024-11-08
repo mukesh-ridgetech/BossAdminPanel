@@ -9,10 +9,10 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [auth, setAuth] = useAuth();
-    console.log(baseurl)
+    // console.log(baseurl)
 
     const onFinish = async (values) => {
-        console.log(values)
+        // console.log(values)
         setLoading(true);
         try {
             const response = await axios.post(baseurl+ '/api/admin/login', {
@@ -20,9 +20,9 @@ const Login = () => {
                 password: values.password,
             });
 
-            console.log(response.data);
-            console.log(response.data.success);
-            console.log(response.data.token);
+            console.log(response,"lkjj");
+            // console.log(response.data.success);
+            // console.log(response.data.token);
 
             if ( response.data.success) {
                 localStorage.setItem('authToken', response.data.token);

@@ -43,10 +43,28 @@ const JobPost = () =>
   const [imageTrue, setImageTrue] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [educationFields, setEducationFields] = useState(['']);
+  const[cross,setCross] = useState(true);
+  const [record1, setRecord] = useState();
+  
 
 
 
   const [val, setVal] = useState([{ type: '' }]);
+
+
+  const handleCross = ()=>{
+    setCross(false);
+  }
+
+  const handleRowClick = (record) => {
+    console.log("Clicked row data:", record);
+    setRecord(record);
+    setImage(record?.image);
+    setCross(true);
+   
+    // Access the clicked row's data here
+    // You can now use 'record' to get the details of the clicked row
+  };
 
   // Handle add new input field
   const handleAdd1 = () =>
@@ -95,8 +113,6 @@ const JobPost = () =>
 
 
 
-
-
   // http://localhost:5000/api/amenities/getAmenties
   useEffect(() =>
   {
@@ -116,7 +132,7 @@ const JobPost = () =>
 
         const reversedArr = respons.data.jobs.reverse();
         setData(reversedArr);
-        message.success('Job post fetched successfully!');
+        // message.success('Job post fetched successfully!');
       }
 
       //   message.success('Country codes fetched successfully!');
@@ -269,7 +285,7 @@ const JobPost = () =>
       jobDescription: values.jobDescription,
       email: values.email,
       image: image1,
-      phone: "123456987",
+      phone: values.phoneNumber,
 
 
     }
@@ -282,7 +298,7 @@ const JobPost = () =>
 
       if (response.data)
       {
-        message.success("Job Updated Successfully");
+        message.success("Job created Successfully");
         setIsModalOpen(false);
         setPhoto("");
         fetchJobPost()
@@ -404,21 +420,15 @@ const JobPost = () =>
     // category
     {
       title: "Education",
-      // dataIndex: "locations",
       key: "upper_jd",
       render: (_, record) => (
-
         <>
           {
-            record?.upper_jd?.map((item) =>
-            {
-              return (
-                <>
-
-                  <span>{item},</span>
-                </>
-              )
-            })
+            record?.upper_jd?.map((item, index) => (
+              <span key={index}>
+                {item}{index < record.upper_jd.length - 1 ? ',' : ''}
+              </span>
+            ))
           }
         </>
       ),
@@ -537,6 +547,12 @@ const JobPost = () =>
         dataSource={data}
         loading={loading}
         scroll={{ x: 'max-content' }}
+        rowKey={(record) => record._id}
+        onRow={(record) => ({
+          onClick: () => {
+            handleRowClick(record); // Trigger the click handler
+          },
+        })}
       // rowKey="_id"
       />
 
@@ -700,7 +716,14 @@ const JobPost = () =>
 
           {
             editingJobPost ? (<>
-              <Form.Item
+
+            {
+              cross?(<>
+               <CloseCircleOutlined style={{width:"30px"}} onClick={handleCross} />
+               <img src={`${baseurl}${record1?.image}`} alt="" style={{width:"100px",height:"100px"}} />
+              </>):(<>
+              
+                <Form.Item
                 label="Photo"
                 name="photo"
                 onChange={(e) => setPhoto(e.target.files[0])}
@@ -738,6 +761,9 @@ const JobPost = () =>
                   />
                 </div>
               )}
+              </>)
+            }
+             
 
             </>)
 
