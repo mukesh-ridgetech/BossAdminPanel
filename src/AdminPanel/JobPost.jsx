@@ -350,7 +350,8 @@ const JobPost = () =>
       phone: values.phoneNumber,
       email: values.email,
       image: image1,
-      phoneNumber: "123456987"
+      phoneNumber: "123456987",
+      agree:values.agree
 
     }
 
