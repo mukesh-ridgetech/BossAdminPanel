@@ -146,7 +146,7 @@ const ApplicationSend = () => {
     const pdfdata = baseurl+record.pdf
     setPdfFile(pdfdata);
     setIsModalOpen(true)
-         console.log(pdfdata)
+    console.log(pdfdata)
   }
 
 

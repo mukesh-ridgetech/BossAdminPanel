@@ -15,7 +15,7 @@ const PdfComp = ({ url }) => {
 
     <>
     <div className="pdf-viewer-container">
-      <h1 className="pdf-viewer-title">Resume Pdf</h1>
+      {/* <h1 className="pdf-viewer-title">Resume Pdf</h1> */}
       
       <div className="pdf-controls">
         <button 
