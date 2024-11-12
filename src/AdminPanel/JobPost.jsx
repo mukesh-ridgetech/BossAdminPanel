@@ -10,6 +10,7 @@ import
   message,
   Upload,
   Switch,
+  Checkbox
 } from "antd";
 const { TextArea } = Input;
 
@@ -286,10 +287,11 @@ const JobPost = () =>
       email: values.email,
       image: image1,
       phone: values.phoneNumber,
-
+      agree:values.agree
 
     }
-
+    
+    
 
     try
     {
@@ -812,7 +814,21 @@ const JobPost = () =>
               </>)
           }
 
-
+              
+  <Form.Item
+        name="agree"
+        valuePropName="checked"
+        rules={[
+          {
+            validator: (_, value) =>
+              value
+                ? Promise.resolve()
+                : Promise.reject(new Error('You must agree to the terms')),
+          },
+        ]}
+      >
+        <Checkbox>Post this job to facebook Page</Checkbox>
+      </Form.Item>  
 
 
           <Form.Item>
