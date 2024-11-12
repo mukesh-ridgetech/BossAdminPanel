@@ -818,14 +818,7 @@ const JobPost = () =>
   <Form.Item
         name="agree"
         valuePropName="checked"
-        rules={[
-          {
-            validator: (_, value) =>
-              value
-                ? Promise.resolve()
-                : Promise.reject(new Error('You must agree to the terms')),
-          },
-        ]}
+        
       >
         <Checkbox>Post this job to facebook Page</Checkbox>
       </Form.Item>  
