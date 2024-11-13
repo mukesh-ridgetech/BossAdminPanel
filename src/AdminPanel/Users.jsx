@@ -38,7 +38,7 @@ const Users = () => {
       setData(res.data.users);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error In Fetching Data:", error);
       setLoading(false);
     }
   };
@@ -66,7 +66,7 @@ const Users = () => {
          console.log(response)
 
          if(response){
-          message.success("Status updated succesfully")
+          message.success("Status Updated Successfully")
           fetchData()
          }
       } catch (error) {
@@ -88,7 +88,7 @@ const Users = () => {
 
           if(response.data){
             setIsModalOpen(false);
-            message.success("User created successfully!");
+            message.success("User Created Successfully!");
             fetchData();
           }
 
@@ -112,7 +112,7 @@ const Users = () => {
         if(response.data){
           setIsModalOpen(false);
           fetchData();
-          message.success("User update successfully!");
+          message.success("User Update Successfully!");
         }
 
     } catch (error) {

@@ -113,7 +113,7 @@ const PersonalDetails = () => {
       setData(filterdata);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error In Fetching Data:", error);
       setLoading(false);
     }
   };
@@ -129,7 +129,7 @@ const PersonalDetails = () => {
          console.log(response)
 
          if(response){
-          message.success("Status updated succesfully")
+          message.success("Status Updated Successfully")
           fetchData()
          }
       } catch (error) {

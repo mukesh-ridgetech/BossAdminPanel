@@ -32,13 +32,13 @@ const Login = () => {
                     user: response.data.admin,
                     token: response.data.token,
                   });
-                message.success('Login successful!');
+                message.success('Login Successful!');
                 navigate('/admin'); 
             } else {
-                message.error('Invalid email or password');
+                message.error('Invalid Email or Password');
             }
         } catch (error) {
-            message.error('Invalid email or password');
+            message.error('Invalid Email or Password');
         }
         setLoading(false);
     };

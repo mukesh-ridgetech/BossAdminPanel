@@ -309,7 +309,7 @@ const ApplicationSend = () => {
          console.log(response)
 
          if(response){
-          message.success("Status updated succesfully")
+          message.success("Status Updated Successfully")
           fetchData()
          }
       } catch (error) {

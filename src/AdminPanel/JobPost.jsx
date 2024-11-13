@@ -139,8 +139,8 @@ const JobPost = () =>
       //   message.success('Country codes fetched successfully!');
     } catch (error)
     {
-      console.error('Error fetching jobPost:', error);
-      message.error('Error fetching jobPost.');
+      console.error('Error In Fetching Job Post:', error);
+      message.error('Error In Fetching Job Post.');
     } finally
     {
       setLoading(false);
@@ -157,7 +157,7 @@ const JobPost = () =>
 
       if (response)
       {
-        message.success("Status updated succesfully")
+        message.success("Status Updated Successfully")
         fetchJobPost();
       }
     } catch (error)
@@ -211,7 +211,7 @@ const JobPost = () =>
     } catch (error)
     {
       message.error("Error uploading image. Please try again later.");
-      console.error("Image upload error:", error);
+      console.error("Image Upload error:", error);
       return null;
     }
   };
@@ -300,7 +300,7 @@ const JobPost = () =>
 
       if (response.data)
       {
-        message.success("Job created Successfully");
+        message.success("Job Created Successfully");
         setIsModalOpen(false);
         setPhoto("");
         fetchJobPost()
