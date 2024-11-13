@@ -88,7 +88,8 @@ const ApplicationSend = () => {
     try {
       const res = await axios.get(baseurl + "/api/sendApplication/getAllSendApplication");
       const personal = await axios.get(baseurl + "/api/personal/get-details");
-      // console.log("personal.data",personal.data)
+      console.log("personal.data",personal.data);
+      console.log("application data is",res.data.sendApplications)
 
       if(res.data && personal.data){
         const combinedArray = [...personal.data, ...res.data.sendApplications];
@@ -116,17 +117,17 @@ const ApplicationSend = () => {
 
       const a =   sortDataByTimestamp(combinedArray,'desc');
 
-      const sortedData = a.sort((a, b) => {
-        if (a?.job?.jobName.toLowerCase() < b?.job?.jobName.toLowerCase()) {
-          return -1;
-        }
-        if (a?.job?.jobName.toLowerCase() > b?.job?.jobName.toLowerCase()) {
-          return 1;
-        }
-        return 0;
-      });
+      // const sortedData = a.sort((a, b) => {
+      //   if (a?.job?.jobName.toLowerCase() < b?.job?.jobName.toLowerCase()) {
+      //     return -1;
+      //   }
+      //   if (a?.job?.jobName.toLowerCase() > b?.job?.jobName.toLowerCase()) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // });
       
-      setData(sortedData);
+      setData(a);
       
       // console.log("a is sortedData",sortedData);
       }

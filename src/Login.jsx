@@ -20,9 +20,7 @@ const Login = () => {
                 password: values.password,
             });
 
-            console.log(response,"lkjj");
-            // console.log(response.data.success);
-            // console.log(response.data.token);
+            console.log(response)
 
             if ( response.data.success) {
                 localStorage.setItem('authToken', response.data.token);
