@@ -58,12 +58,15 @@ const ApplicationSend = () => {
              text:item?.jobName,
              value:item?.jobName,
             }
+
+           
          return returndata;
            
        })
-
-       setjobTitlesToFilter(data)
-       console.log(data,"data is now title")
+      
+       const uniqueData = [...new Map(data.map(item => [item.text, item])).values()];
+       setjobTitlesToFilter(uniqueData)
+       console.log(uniqueData,"data is now title")
          }
        } catch (error) {
         console(error)
